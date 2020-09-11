@@ -1,10 +1,10 @@
-﻿using Citrullia.Library;
-using Citrullia.Library.MassSpectra;
+﻿using Citrullia.Library.MassSpectra;
+using Citrullia.Library.XTandem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Citrullia
+namespace Citrullia.Library.Scoring
 {
     /// <summary>
     /// Utility class for the score function.
@@ -73,23 +73,23 @@ namespace Citrullia
         /// </summary>
         /// <param name="inputSpectra">The dictionary with the arginine spectra to be scored and their complementary citrullinated spectra.</param>
         /// <returns>he dictionary with the scored spectra an their complementary citrullinated spectra.</returns>
-        internal static Dictionary<XTSpectrum, List<RawScan>> ScoreArginineSpectra(Dictionary<XTSpectrum, List<RawScan>> inputSpectra)
+        internal static Dictionary<XTSpectrum, List<MgxScan>> ScoreArginineSpectra(Dictionary<XTSpectrum, List<MgxScan>> inputSpectra)
         {
             // Create a temporary dictionary of scored spectra
-            Dictionary<XTSpectrum, List<RawScan>> scoredSpectra = new Dictionary<XTSpectrum, List<RawScan>>();
+            Dictionary<XTSpectrum, List<MgxScan>> scoredSpectra = new Dictionary<XTSpectrum, List<MgxScan>>();
 
             // Loop throguh all of the spectra keyvaluepairs
-            foreach (KeyValuePair<XTSpectrum, List<RawScan>> spectrum in inputSpectra)
+            foreach (KeyValuePair<XTSpectrum, List<MgxScan>> spectrum in inputSpectra)
             {
                 // Get the arginine spectrum and set the array of isocyanic loss m/z in order to prevent error
                 XTSpectrum argSpectrum = spectrum.Key;
                 argSpectrum.IsoCyanicLossMzMs2 = new double[0];
-                List<RawScan> scoredCompCitScans = new List<RawScan>();
+                List<MgxScan> scoredCompCitScans = new List<MgxScan>();
                 // Loop trough all of the complementary cit spectra
-                foreach (RawScan citScan in spectrum.Value)
+                foreach (MgxScan citScan in spectrum.Value)
                 {
                     // Calculate the score
-                    RawScan scoredScan = ScoreCitComplSpectrum(argSpectrum, citScan);
+                    MgxScan scoredScan = ScoreCitComplSpectrum(argSpectrum, citScan);
                     // Add the score to the list of cit scans
                     scoredCompCitScans.Add(scoredScan);
 
@@ -225,10 +225,10 @@ namespace Citrullia
         /// <param name="spectrum">The spectrum with the fragmentation to be validated.</param>
         /// <param name="aaSequence">The amino acid sequence.</param>
         /// <returns>True, if valid fragmentation; Otherwise, false.</returns>
-        private static bool ValidateSpectrumFragmentation(MsSpectrum spectrum, string[] aaSequence)
+        private static bool ValidateSpectrumFragmentation(MsSpectrumBase spectrum, string[] aaSequence)
         {
             // Check that spectrum contains an arginine
-            if(aaSequence.Contains("R") == false)
+            if (aaSequence.Contains("R") == false)
             {
                 return false;
             }
@@ -276,7 +276,7 @@ namespace Citrullia
 
             int citIndex = GetIndexOfCitrullination(mainCitSpectrum);
             // Get the mass fragment error
-            double fragMassError = double.Parse(External.XTandemInput.FMError, FileReader.NumberFormat);
+            double fragMassError = double.Parse(External.XTandemInput.FMError, FileUtilities.NumberFormat);
             // Loop through the all of amino acid sequence. However only the index is used.
             for (int i = 0; i < mainCitSpectrum.SpectrumAminoAcidSequence.Length; i++)
             {
@@ -568,7 +568,7 @@ namespace Citrullia
             foreach (KeyValuePair<int, double> mod in spectrum.SpectrumBIonModDict)
             {
                 // Check that the modification mass change equals the citrullination. If it does, return the key
-                if(mod.Value == 0.984)
+                if (mod.Value == 0.984)
                 {
                     return mod.Key;
                 }
@@ -614,7 +614,7 @@ namespace Citrullia
         /// </summary>
         /// <param name="spectrum">The spectrum to be checked.</param>
         /// <returns>True, if isocyanic acid is present; Otherwise, false.</returns>
-        private static bool IsIsoCyanicAcidLossPresentMs1(MsSpectrum spectrum)
+        private static bool IsIsoCyanicAcidLossPresentMs1(MsSpectrumBase spectrum)
         {
             // Get the precursor m/z value
             double precursorMz = spectrum.PreCursorMz;
@@ -662,7 +662,7 @@ namespace Citrullia
         /// <param name="citIndex">The index of the citrullinated arginine.</param>
         /// <param name="aaSeq">The amino acid sequence.</param>
         /// <returns>The number of isocyanic acid losses.</returns>
-        private static double CountIsoCyanicAcidLossPresentMs2(MsSpectrum citSpectrum, int citIndex, string[] aaSeq)
+        private static double CountIsoCyanicAcidLossPresentMs2(MsSpectrumBase citSpectrum, int citIndex, string[] aaSeq)
         {
             // Create temporay list of isocyanic loss M/Z
             List<double> cyanlossMz = new List<double>();
@@ -683,17 +683,17 @@ namespace Citrullia
                 // Loop through the all of amino acid sequence.However only the index is used.
                 for (int i = 0; i < aaSeq.Length; i++)
                 {
-                    if(IsoListContains(cyanlossMz, mzVal)) continue;
+                    if (IsoListContains(cyanlossMz, mzVal)) continue;
                     // Check that the this is the citrullinated a- or b-ions. The aa index is greater than or equal to the index of the citrullination.
                     if (i >= citIndex)
                     {
                         // Check that both spectra contains the A-ion at this specific amino acid
                         if (citSpectrum.AIonIndex.Contains(i))
                         {
-                        /* Calculate A-ion */
-                        // Get the M/Z value for A-ion on the complementary citrullinated spectrum
-                        double citMz = citSpectrum.SpectrumPossibleAIons[i];
-                        // If the spectrum has an ion that is 43 Da less than the cit spectrum, add the spectrum m/z to the list
+                            /* Calculate A-ion */
+                            // Get the M/Z value for A-ion on the complementary citrullinated spectrum
+                            double citMz = citSpectrum.SpectrumPossibleAIons[i];
+                            // If the spectrum has an ion that is 43 Da less than the cit spectrum, add the spectrum m/z to the list
                             if (HelperUtilities.IsApproximately(mzVal, citMz - 43, ScoreSettings.CyanicLossTolerance))
                             {
                                 cyanlossMz.Add(mzVal);
@@ -763,7 +763,7 @@ namespace Citrullia
                                 yIonCount++;
                                 continue;
                             }
-                        }   
+                        }
 
                         // Check that both spectra contains the Y-17 ion at this specific amino acid
                         if (citSpectrum.Y17IonIndex.Contains(i))
@@ -858,13 +858,13 @@ namespace Citrullia
         /// Add the Arg Spectra to quantification.
         /// </summary>
         /// <param name="scoredSpectra">The spectra to be added.</param>
-        private static void AddArgSpectraAboveCutOffToQuantification(Dictionary<XTSpectrum, List<RawScan>> scoredSpectra)
+        private static void AddArgSpectraAboveCutOffToQuantification(Dictionary<XTSpectrum, List<MgxScan>> scoredSpectra)
         {
             // Loop through all of the spectra
-            foreach (KeyValuePair<XTSpectrum, List<RawScan>> spectrum in scoredSpectra)
+            foreach (KeyValuePair<XTSpectrum, List<MgxScan>> spectrum in scoredSpectra)
             {
                 // Loop through all of the complementary cit spectra
-                foreach (RawScan complSpectra in spectrum.Value)
+                foreach (MgxScan complSpectra in spectrum.Value)
                 {
                     // Check that the CitScore is greater than the CutOff value
                     if (complSpectra.CitScore >= ScoreSettings.CutOffScore && Quantification.argSpecScanDict.ContainsKey(spectrum.Key) == false)

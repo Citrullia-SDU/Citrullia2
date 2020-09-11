@@ -7,7 +7,7 @@ namespace Citrullia.Library.MassSpectra
     /// <summary>
     /// Information about an MGX-scan.
     /// </summary>
-    public class MgxScan : MsSpectrum
+    public class MgxScan : MsSpectrumBase
     {
         /// <summary>The scan number.</summary>
         internal int ScanNumber { get; set; }

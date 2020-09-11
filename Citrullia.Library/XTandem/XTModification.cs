@@ -1,4 +1,4 @@
-﻿namespace Citrullia
+﻿namespace Citrullia.Library.XTandem
 {
 
     /// <summary>Data class for representing X!Tandem modification.</summary>

@@ -1,4 +1,4 @@
-﻿namespace Citrullia
+﻿namespace Citrullia.Library.Quantification
 {
     /// <summary>
     /// Data class representing the Quantification result.

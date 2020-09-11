@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Citrullia.Library.MassSpectra;
+using System.Collections.Generic;
 
-namespace Citrullia
+namespace Citrullia.Library.XTandem
 {
     /// <summary>Data class for representing X!Tandem spectrum.</summary>
     // TODO: Maybe initialise by constructor
     // TODO: Remove unnecessary properties 
-    internal class XTSpectrum : MsSpectrum
+    internal class XTSpectrum : MsSpectrumBase
     {
         /// <summary>The spectrum ID.</summary>
         internal int ID { get; set; }

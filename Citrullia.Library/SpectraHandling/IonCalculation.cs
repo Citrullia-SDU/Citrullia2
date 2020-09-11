@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Citrullia.Library.MassSpectra;
+using Citrullia.Library.XTandem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Citrullia
+namespace Citrullia.Library.SpectraHandling
 {
     /// <summary>
     /// Utility class for calculating the ions.
@@ -249,7 +251,7 @@ namespace Citrullia
                     bIon += modMass;
                 }
                 // Add the amino acid mass and the mass qnd the mass of the proton to the b-ion
-                double extraMass = (i == 0) ? pMass : 0;
+                double extraMass = i == 0 ? pMass : 0;
                 bIon += scanMS2.SpectrumAaMasses[i] + extraMass;
                 // Add the b-ion value to the list
                 bIons.Add(bIon);
@@ -287,7 +289,7 @@ namespace Citrullia
                     yIon += modMass;
                 }
                 // Add the amino acid mass and the mass qnd the mass of the proton, hydrogen and hydroxyl-group to the y-ion+
-                double extraMass = (i == 0) ? (ohMass + hMass + pMass) : 0;
+                double extraMass = i == 0 ? ohMass + hMass + pMass : 0;
                 yIon += aaMasses[i] + extraMass;
                 // Add the y-ion value to the list
                 yIons.Add(yIon);
@@ -335,10 +337,10 @@ namespace Citrullia
             double oMass = 15.994914630;
             double ohMass = hMass + oMass;
             double coMass = cMAss + oMass;
-            double h2oMass = (2 * hMass) + oMass;
+            double h2oMass = 2 * hMass + oMass;
 
             // Get the mass fragment error
-            double error = double.Parse(External.XTandemInput.FMError, FileReader.NumberFormat);
+            double error = double.Parse(External.XTandemInput.FMError, FileUtilities.NumberFormat);
 
             // Loop through all of the M/Z-values in the spectrum
             foreach (double mz in scanMS2.MzValues)
@@ -474,14 +476,14 @@ namespace Citrullia
         /// <param name="argScanMS2">The arginine MS2 spectrum.</param>
         /// <param name="potCitMS2Scan">The potential citrulliated scan.</param>
         /// <returns>The scan with the potential citrullination ions.</returns>
-        internal static RawScan CalculateAllPotentialCitrullinationIons(XTSpectrum argScanMS2, RawScan potCitMS2Scan)
+        internal static MgxScan CalculateAllPotentialCitrullinationIons(XTSpectrum argScanMS2, MgxScan potCitMS2Scan)
         {
             // Get the amino acid sequence
             string[] aas = argScanMS2.SpectrumAminoAcidSequence;
             // Create a variable for holding the arginine B-index
             int aaModB = 0;
             // Loop through the sequence and try to find the index of the arginine.
-            for (int i = 0; i <= aas.Length-1; i++)
+            for (int i = 0; i <= aas.Length - 1; i++)
             {
                 if (aas[i] == "R")
                 {
@@ -490,11 +492,11 @@ namespace Citrullia
                 }
             }
             // Calculate the Y-index
-            int aaModY = Math.Abs(aaModB - aas.Length)-1;
+            int aaModY = Math.Abs(aaModB - aas.Length) - 1;
             // Create a temporary list for the possible y-ions
             List<double> posYIonList = new List<double>();
             // Loop through all of the possible y-ions
-            for (int i = 0; i <= argScanMS2.SpectrumPossibleYIons.Length-1; i++)
+            for (int i = 0; i <= argScanMS2.SpectrumPossibleYIons.Length - 1; i++)
             {
                 // If the current ion is greater than the currenty y-ion index
                 if (i >= aaModY)
@@ -515,7 +517,7 @@ namespace Citrullia
             // Create a temporary list of B-ions
             List<double> posBIonList = new List<double>();
             // Loop through all of the possible y-ions
-            for (int i = 0; i <= argScanMS2.SpectrumPossibleBIons.Length-1; i++)
+            for (int i = 0; i <= argScanMS2.SpectrumPossibleBIons.Length - 1; i++)
             {
                 // If the current ion is greater than the currenty b-ion index
                 if (i >= aaModB)
@@ -563,10 +565,10 @@ namespace Citrullia
             double oMass = 15.994914630;
             double ohMass = hMass + oMass;
             double coMass = cMAss + oMass;
-            double h2oMass = (2 * hMass) + oMass;
+            double h2oMass = 2 * hMass + oMass;
 
             //Begin calculating all the existing Ions in the spectrum:
-            double error = double.Parse(External.XTandemInput.FMError, FileReader.NumberFormat);
+            double error = double.Parse(External.XTandemInput.FMError, FileUtilities.NumberFormat);
 
             // Loop through all of the M/Z-values
             foreach (double mz in potCitMS2Scan.MzValues)

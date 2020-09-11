@@ -1,8 +1,9 @@
 ﻿using Citrullia.Library.MassSpectra;
+using Citrullia.Library.XTandem;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Citrullia
+namespace Citrullia.Library.Quantification
 {
     /// <summary>
     /// Utility class for the Qauantification.
@@ -134,7 +135,7 @@ namespace Citrullia
                 // Create a placeholder variable for the extracted ion count
                 double citXIC = 0;
                 // Loop through the input files and find the one that have the same input filename
-                foreach (Input input in FileReader.inputFiles)
+                foreach (InputData input in FileReader.inputFiles)
                 {
                     string inputFileName = input.FilePath.Split('\\').Last();
                     if (inputFileName == spectrum.OriginalFileName)
@@ -178,7 +179,7 @@ namespace Citrullia
                 double argXIC = 0;
                 double citXIC = 0;
                 // Loop through the input files and find the one that have the same input filename
-                foreach (Input input in FileReader.inputFiles)
+                foreach (InputData input in FileReader.inputFiles)
                 {
                     string inputFileName = input.FilePath.Split('\\').Last();
                     if (inputFileName == kvp.Key.OriginalFileName)
@@ -228,7 +229,7 @@ namespace Citrullia
                 double citXIC = 0;
                 double argXIC = 0;
                 // Loop through the input files and find the one that have the same input filename
-                foreach (Input input in FileReader.inputFiles)
+                foreach (InputData input in FileReader.inputFiles)
                 {
                     string inputFileName = input.FilePath.Split('\\').Last();
                     if (inputFileName == kvp.Key.OriginalFileName)
@@ -270,7 +271,7 @@ namespace Citrullia
         /// <param name="xic">The current extracted ion count.</param>
         /// <param name="input">The input file.</param>
         /// <returns>The extracted ion count for the spectrum.</returns>
-        private static double CalculateExtractedIonCount(MsSpectrum spectrum, double xic, Input input)
+        private static double CalculateExtractedIonCount(MsSpectrumBase spectrum, double xic, InputData input)
         {
             // Calculate the retention time interval
             int timeLow = spectrum.RetentionTime - (rTInterval * 60);

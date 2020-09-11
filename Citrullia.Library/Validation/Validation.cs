@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Citrullia.Library.MassSpectra;
+using Citrullia.Library.SpectraHandling;
+using Citrullia.Library.XTandem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Citrullia
+namespace Citrullia.Library.Validation
 {
     /// <summary>
     /// Utilities class for validations.
     /// </summary>
-    // Transfer
     internal static class Validation
     {
         /// <summary>List of citrullination spectra validation.</summary>
@@ -254,11 +256,11 @@ namespace Citrullia
                 // Get the name of the inpput file
                 string inputFileName = result.ParentResult.OriginalInputFile;
                 // Loop through all of the input results
-                foreach (Input input in FileReader.inputFiles)
+                foreach (InputData input in FileReader.inputFiles)
                 {
                     // TODO: Can be inserted into if statement if it needs only to work on single results
                     // Create a temporary dictionary of spectra and their complementary scans
-                    Dictionary<XTSpectrum, List<RawScan>> compPepDic = new Dictionary<XTSpectrum, List<RawScan>>();
+                    Dictionary<XTSpectrum, List<MgxScan>> compPepDic = new Dictionary<XTSpectrum, List<MgxScan>>();
                     // Loop through all of the arginine spectra
                     foreach (XTSpectrum specArg in result.ArginineSpectra)
                     {
@@ -271,20 +273,20 @@ namespace Citrullia
                         {
                             // If not.
                             // Create a tmeporary list of complementary scans
-                            var compPeptides = new List<RawScan>();
+                            var compPeptides = new List<MgxScan>();
                             // Calculate the ions
                             XTSpectrum scanArg = IonCalculation.CalculateAllIons(specArg);
                             // Loop through all of the MS2 scans
-                            foreach (RawScan mgfScan in input.MS2Scans)
+                            foreach (MgxScan mgfScan in input.MS2Scans)
                             {
                                 // Calculate the parent mass error
-                                double delta = Math.Abs(scanArg.ParentMass - ((mgfScan.PreCursorMz * mgfScan.Charge) - ((mgfScan.Charge - 1) * pMass) - 0.984));
+                                double delta = Math.Abs(scanArg.ParentMass - (mgfScan.PreCursorMz * mgfScan.Charge - (mgfScan.Charge - 1) * pMass - 0.984));
                                 // Check if the parent mass error is less than the allowed parent mass error
                                 if (delta <= error)
                                 {
                                     // If so.
                                     // Calculate the relative intenties values
-                                    RawScan normMgfScan = CalcRelativeIntVals(mgfScan);
+                                    MgxScan normMgfScan = CalcRelativeIntVals(mgfScan);
                                     // Calculate all potential citrullination ions
                                     normMgfScan = IonCalculation.CalculateAllPotentialCitrullinationIons(scanArg, normMgfScan);
                                     // Get the original filename 
@@ -319,7 +321,7 @@ namespace Citrullia
             // Set the result list
             ReturnValResultArg(vResultList);
         }
-        
+
         private static List<ValidationResult> ReturnValResultArg(List<ValidationResult> vResultList)
         {
             argValResults = vResultList;
@@ -331,7 +333,7 @@ namespace Citrullia
         /// </summary>
         /// <param name="mgfScan">The scan.</param>
         /// <returns>The scan with normalised intensities.</returns>
-        private static RawScan CalcRelativeIntVals(RawScan mgfScan)
+        private static MgxScan CalcRelativeIntVals(MgxScan mgfScan)
         {
             // Get the maximum intensity in the scan
             double maxInt = mgfScan.Intencities.Max();
@@ -392,7 +394,7 @@ namespace Citrullia
         /// <param name="potCitSpecMS2">The MS2 scab.</param>
         /// <param name="input">The input file.</param>
         /// <returns>The MS2 scan with the original filename.</returns>
-        private static RawScan ReturnOriginalFileNameScan(RawScan potCitSpecMS2, Input input)
+        private static MgxScan ReturnOriginalFileNameScan(MgxScan potCitSpecMS2, InputData input)
         {
             potCitSpecMS2.OriginalFileName = input.FilePath.Split('\\').Last();
             return potCitSpecMS2;
@@ -504,7 +506,7 @@ namespace Citrullia
         /// </summary>
         /// <param name="scanMS2">The spectrum.</param>
         /// <returns>The spectrum with the original scan ID.</returns>
-        private static XTSpectrum GetOriginalScanID (XTSpectrum scanMS2)
+        private static XTSpectrum GetOriginalScanID(XTSpectrum scanMS2)
         {
             int orgID = int.Parse(scanMS2.SpectrumDescription.Split(';').First().Split(' ').Last());
             scanMS2.ID = orgID;

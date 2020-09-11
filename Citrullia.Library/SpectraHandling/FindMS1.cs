@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using Citrullia.Library;
+using Citrullia.Library.MassSpectra;
+using Citrullia.Library.XTandem;
+using System.Linq;
 
-namespace Citrullia
+namespace Citrullia.Library.SpectraHandling
 {
     /// <summary>
     /// Data class for finding the MS1.
@@ -19,7 +22,7 @@ namespace Citrullia
             int scanNumb = int.Parse(description.Split(';').First().Split(' ').Last());
 
             // Loop through each of the input files
-            foreach (Input input in FileReader.inputFiles)
+            foreach (InputData input in FileReader.inputFiles)
             {
                 // Get the input file name
                 string inputFileName = input.FilePath.Split('\\').Last();
@@ -28,7 +31,7 @@ namespace Citrullia
                 {
                     // If the filename matches the input filename
                     // Loop through all of the MS2 scans in the input
-                    foreach (RawScan scan in input.MS2Scans)
+                    foreach (MgxScan scan in input.MS2Scans)
                     {
                         // Check if the scan number matches the scan number of the MS2 spectrum
                         if (scanNumb == scan.ScanNumber)
@@ -44,14 +47,14 @@ namespace Citrullia
                     }
 
                     // Loop through each of the MS1 scans
-                    foreach (RawScan s in input.MS1Scans)
+                    foreach (MgxScan scan in input.MS1Scans)
                     {
                         // Check if the MS2 spectrum parent scan number matches the MS1 scan
-                        if (spectrumMS2.ParentScanNumber == s.ScanNumber)
+                        if (spectrumMS2.ParentScanNumber == scan.ScanNumber)
                         {
                             // If so
                             // Set the parent scan
-                            spectrumMS2.ParentScan = s;
+                            spectrumMS2.ParentScan = scan;
                             // Set it to be an non-orphan
                             spectrumMS2.Orphan = false;
                             // Break and continue with the next scan
@@ -75,10 +78,10 @@ namespace Citrullia
         /// </summary>
         /// <param name="scanMS2">The MS2 scan.</param>
         /// <returns>The MS2 spectrum with the new information.</returns>
-        internal static RawScan FindPotCitParentMS1Scan(RawScan scanMS2)
+        internal static MgxScan FindPotCitParentMS1Scan(MgxScan scanMS2)
         {
             // Loop through each of the input files
-            foreach (Input input in FileReader.inputFiles)
+            foreach (InputData input in FileReader.inputFiles)
             {
                 // Get the filename of the input file
                 string inputFileName = input.FilePath.Split('\\').Last();
@@ -86,13 +89,13 @@ namespace Citrullia
                 if (scanMS2.OriginalFileName == inputFileName)
                 {
                     // Loop through each of the MS1 scans
-                    foreach (RawScan s in input.MS1Scans)
+                    foreach (MgxScan scan in input.MS1Scans)
                     {
                         // Check if the MS2 parent scan number matches the MS1 scan number
-                        if (scanMS2.ParentScanNumber == s.ScanNumber)
+                        if (scanMS2.ParentScanNumber == scan.ScanNumber)
                         {
                             // If so: Set the MS1 scan as the parent scan of MS2
-                            scanMS2.ParentScan = s;
+                            scanMS2.ParentScan = scan;
                             // Set MS2 to be an non-orphan
                             scanMS2.Orphan = false;
                             // Break and continue with the next scan
@@ -122,7 +125,7 @@ namespace Citrullia
             // Create an array of intensities
             double[] valInt = { 30, 50, 100, 70, 40, 10, 20, 60 };
             // Create a parent scan
-            var scanParent = new RawScan { MzValues = valMZ, RetentionTime = 0, Intencities = valInt, TotalIonCount = 0 };
+            var scanParent = new MgxScan { MzValues = valMZ, RetentionTime = 0, Intencities = valInt, TotalIonCount = 0 };
             
             // If the spectrum is an orphan set the newly created scan to be the parent
             if (spectrumMS2.Orphan == true)
@@ -139,14 +142,14 @@ namespace Citrullia
         /// </summary>
         /// <param name="scanMS2">The MS2 scan.</param>
         /// <returns>The MS2 scan with a "false" parent.</returns>
-        internal static RawScan HandleOrphanScans(RawScan scanMS2)
+        internal static MgxScan HandleOrphanScans(MgxScan scanMS2)
         {
             // Create an array of MZ-values
             double[] valMZ = { 100, 300, 500, 700, 900, 1100, 1300, scanMS2.PreCursorMz };
             // Create an array of intensities
             double[] valInt = { 30, 50, 100, 70, 40, 10, 20, 60 };
             // Create a parent scan
-            var scanParent = new RawScan { MzValues = valMZ, RetentionTime = 0, Intencities = valInt, TotalIonCount = 0 };
+            var scanParent = new MgxScan { MzValues = valMZ, RetentionTime = 0, Intencities = valInt, TotalIonCount = 0 };
 
             // If the scan is an orphan set the newly created scan to be the parent
             if (scanMS2.Orphan == true)

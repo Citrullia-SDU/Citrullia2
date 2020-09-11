@@ -1,7 +1,8 @@
 ﻿using Citrullia.Library.MassSpectra;
+using Citrullia.Library.XTandem;
 using System.Collections.Generic;
 
-namespace Citrullia
+namespace Citrullia.Library.Validation
 {
     /// <summary>
     /// Data class the that represent the validation data.

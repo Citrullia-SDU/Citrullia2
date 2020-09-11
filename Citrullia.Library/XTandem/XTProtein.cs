@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Citrullia
+namespace Citrullia.Library.XTandem
 {
     /// <summary>Data class for representing X!Tandem protein.</summary>
     // TODO: Maybe initialise by constructor

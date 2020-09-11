@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Citrullia
+namespace Citrullia.Library.Scoring
 {
     /// <summary>
     /// Class containing information about the score weights.

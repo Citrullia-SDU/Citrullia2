@@ -1,4 +1,4 @@
-﻿namespace Citrullia
+﻿namespace Citrullia.Library.XTandem
 {
     /// <summary>The class containg the X!Tandem input data.</summary>
     // TODO: Maybe initialise by constructor

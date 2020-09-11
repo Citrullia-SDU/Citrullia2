@@ -86,7 +86,7 @@ namespace Citrullia.Library
                         {
                             double mzValue = double.Parse(dgv.Rows[row].Cells[column].Value.ToString());
 
-                            workSheet.Cells[row + 2, column + 1] = mzValue.ToString(FileReader.NumberFormat);
+                            workSheet.Cells[row + 2, column + 1] = mzValue.ToString(FileUtilities.NumberFormat);
                             workSheet.Cells[row + 2, column + 1].NumberFormat = "##.000";
                         }
                         else

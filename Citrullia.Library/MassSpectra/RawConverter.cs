@@ -7,7 +7,7 @@ namespace Citrullia.Library.MassSpectra
     /// <summary>
     /// Runner for converting RAW-files to MzXML-files.
     /// </summary>
-    public class RawConverter
+    public static class RawConverter
     {
     }
 }

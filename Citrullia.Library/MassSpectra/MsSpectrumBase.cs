@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Citrullia.Library.XTandem;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +8,7 @@ namespace Citrullia.Library.MassSpectra
     /// <summary>
     /// The abstract class containing general information about <see cref="MgxScan"/> and <see cref="XTSpectrum"/>.
     /// </summary>
-    public abstract class MsSpectrum
+    public abstract class MsSpectrumBase
     {
         #region General information
         /// <summary>The filename of the orginal input file.</summary>
