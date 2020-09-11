@@ -9,5 +9,23 @@ namespace Citrullia.Library.Projects
     /// </summary>
     internal class Project
     {
+        /*
+            *Project (class)*
+            string ProjectName
+            string ProjectDescription
+            DateTime ProjectRunTime
+            List<ProjectFile> ProjectFiles
+            ProjectSettings ProjectSettings
+
+            *ProjectFile (class)*
+            string Filename
+            string Description
+            (Maybe statistics: int NumberOfScans, int NumberOfXTandemResults) 
+
+            *ProjectSettings (class)*
+            (XTandemSettings)
+            
+
+         */
     }
 }
