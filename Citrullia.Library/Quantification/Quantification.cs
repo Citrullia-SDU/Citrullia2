@@ -8,6 +8,7 @@ namespace Citrullia.Library.Quantification
     /// <summary>
     /// Utility class for the Qauantification.
     /// </summary>
+    // TODO: Consider combining Quantification and Result-system
     internal static class Quantification
     {
         /// <summary>The dictionary of citrullinated spectra marked for quantification.</summary>

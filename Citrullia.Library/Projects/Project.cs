@@ -10,7 +10,7 @@ namespace Citrullia.Library.Projects
     internal class Project
     {
         /*
-            *Project (class)*
+            *Project*
             string ProjectName
             string ProjectDescription
             DateTime ProjectRunTime

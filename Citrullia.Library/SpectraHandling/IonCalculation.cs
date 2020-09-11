@@ -9,7 +9,7 @@ namespace Citrullia.Library.SpectraHandling
     /// <summary>
     /// Utility class for calculating the ions.
     /// </summary>
-    // Transfer. Maybe refactor
+    // TODP: Consider refactoring and implementing don't repeat yourself-design principle
     internal static class IonCalculation
     {
         /// <summary>The dictionary of amino acids and their mass.</summary>
@@ -21,7 +21,7 @@ namespace Citrullia.Library.SpectraHandling
         /// <param name="precursorMass">The precursor mass.</param>
         /// <param name="scanMS1">The MS1 scan.</param>
         /// <returns>The intensity for the precursor peak.</returns>
-        internal static double FindMS2PrecursorPeakIntInMS1(double precursorMass, RawScan scanMS1)
+        internal static double FindMS2PrecursorPeakIntInMS1(double precursorMass, MgxScan scanMS1)
         {
             // Set a temporary intensity value
             double intVal = 0;
