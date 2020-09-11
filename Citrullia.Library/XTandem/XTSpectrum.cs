@@ -19,33 +19,33 @@ namespace Citrullia.Library.XTandem
         /// <summary>The spectrum label. FASTA file description line for the highest ranked identified protein.</summary>
         internal string SpectrumLabel { get; set; }
         /// <summary>The log10 value of the intensity sum.</summary>
-        internal double LogSumFragIons { get; set; }
+        internal double LogSumFragIons { get; set; } // TODO: Suggest remove
         /// <summary>The max fragment intensity.</summary>
-        internal double MaxFragIonInt { get; set; }
+        internal double MaxFragIonInt { get; set; } // TODO: Suggest remove
         /// <summary>Factor to convert normalized spectrum values to orginal values.</summary>
-        internal double NormMulitplier { get; set; }
+        internal double NormMulitplier { get; set; } // TODO: Suggest remove
         /// <summary>The list of proteins in the spectrum.</summary>
         internal List<XTProtein> Proteins { get; set; }
         /// <summary>The hyperscore A0 of the spectrum.</summary>
-        internal double A0 { get; set; }
+        internal double A0 { get; set; } // TODO: Suggest remove
         /// <summary>The hyperscore's A1 of the spectrum.</summary>
-        internal double A1 { get; set; }
+        internal double A1 { get; set; } // TODO: Suggest remove
         /// <summary>The number of hyperscores.??</summary>
-        internal int[] HyperscoreNumbs { get; set; }
+        internal int[] HyperscoreNumbs { get; set; } // TODO: Suggest remove
         /// <summary>The count of hyperscores for each score??.</summary>
-        internal int[] HyperscoreCounts { get; set; }
+        internal int[] HyperscoreCounts { get; set; } // TODO: Suggest remove
         /// <summary>The number of convolution survival function number.??</summary>
-        internal int[] ConSurvivalNumbs { get; set; }
+        internal int[] ConSurvivalNumbs { get; set; } // TODO: Suggest remove
         /// <summary>The count of convolution survival function for each score.??</summary>
-        internal int[] ConSurvivalCounts { get; set; }
+        internal int[] ConSurvivalCounts { get; set; } // TODO: Suggest remove
         /// <summary>The number of b ions.</summary>
-        internal int[] BIonNumbs { get; set; }
+        internal int[] BIonNumbs { get; set; } // TODO: Suggest remove
         /// <summary>The count of b ions.</summary>
-        internal int[] BIonCounts { get; set; }
+        internal int[] BIonCounts { get; set; } // TODO: Suggest remove
         /// <summary>The number of y ions.</summary>
-        internal int[] YIonNumbs { get; set; }
+        internal int[] YIonNumbs { get; set; } // TODO: Suggest remove
         /// <summary>The number of y ions</summary>
-        internal int[] YIonCounts { get; set; }
+        internal int[] YIonCounts { get; set; } // TODO: Suggest remove
         /// <summary>The M/Z-value of the spectrum (M+H).</summary>
         internal double SpectrumMZ { get; set; }
         /// <summary>The scan title in the input file.</summary>

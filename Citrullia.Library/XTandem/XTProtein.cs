@@ -34,15 +34,15 @@ namespace Citrullia.Library.XTandem
         /// <summary>The difference between the spectrum and calculated mass</summary>
         internal double Delta { get; set; }
         /// <summary>X!Tandem identification score.</summary>
-        internal double Hyperscore { get; set; }
+        internal double Hyperscore { get; set; } // TODO: Suggest remove
         /// <summary>The next score for the protein. TODO: Understand.</summary>
-        internal double NextScore { get; set; }
+        internal double NextScore { get; set; } // TODO: Suggest remove
         /// <summary>The y ion score. TODO: Understand.</summary>
-        internal double YScore { get; set; }
+        internal double YScore { get; set; } // TODO: Suggest remove
         /// <summary>The number of y ions.</summary>
         internal int YIons { get; set; }
         /// <summary>The b ion score. TODO: Understand.</summary>
-        internal double BScore { get; set; }
+        internal double BScore { get; set; } // TODO: Suggest remove
         /// <summary>The number of b ions.</summary>
         internal int BIons { get; set; }
         /// <summary>The 4 amino acids before the domain.</summary>
