@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Citrullia.Library", "Citrul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Citrullia.Library.Tests", "Citrullia.Library.Tests\Citrullia.Library.Tests.csproj", "{828EEDA3-5A50-4D7D-B967-0157098A52EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitrulliaUI", "CitrulliaUI\CitrulliaUI.csproj", "{2F94771E-70B6-4C33-B27C-175F17C56986}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{828EEDA3-5A50-4D7D-B967-0157098A52EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{828EEDA3-5A50-4D7D-B967-0157098A52EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{828EEDA3-5A50-4D7D-B967-0157098A52EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F94771E-70B6-4C33-B27C-175F17C56986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F94771E-70B6-4C33-B27C-175F17C56986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F94771E-70B6-4C33-B27C-175F17C56986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F94771E-70B6-4C33-B27C-175F17C56986}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
