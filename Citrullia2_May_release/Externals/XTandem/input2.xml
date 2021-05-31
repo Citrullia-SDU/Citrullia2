@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<bioml>
+<note type="input" label="spectrum, path">C:\Users\spec-piver16\source\repos\Citrullia2-May_current\Citrullia.Wpf\bin\Debug\netcoreapp3.1\Externals\XTandem\InputMGFs\Dynamic_EXP3_01559_VM.mzXML.MGX.MGX.mgf</note>
+<note type="input" label="list path, default parameters">C:\Users\spec-piver16\source\repos\Citrullia2-May_current\Citrullia.Wpf\bin\Debug\netcoreapp3.1\Externals\XTandem\default_input.xml</note>
+<note type="input" label="list path, taxonomy information">C:\Users\spec-piver16\source\repos\Citrullia2-May_current\Citrullia.Wpf\bin\Debug\netcoreapp3.1\Externals\XTandem\taxonomy2.xml</note>
+<note type="input" label="protein, taxon">yeast</note>
+<note type="input" label="spectrum, parent monoisotopic mass error minus">10</note>
+<note type="input" label="spectrum, parent monoisotopic mass error plus">10</note>
+<note type="input" label="spectrum, parent monoisotopic mass error units">ppm</note>
+<note type="input" label="spectrum, fragment monoisotopic mass error">0.01</note>
+<note type="input" label="spectrum, fragment monoisotopic mass error units">Dalton</note>
+<note type="input" label="spectrum, fragment mass type">monoisotopic</note>
+<note type="input" label="spectrum, parent monoisotopic mass isotope error">yes</note>
+<note type="input" label="spectrum, total peaks">125</note>
+<note type="input" label="spectrum, maximum parent charge">4</note>
+<note type="input" label="spectrum, use noise suppression">yes</note>
+<note type="input" label="spectrum, minimum parent m+h">300</note>
+<note type="input" label="spectrum, minimum fragment mz">146</note>
+<note type="input" label="spectrum, minimum peaks">10</note> 
+<note type="input" label="spectrum, threads">4</note>
+<note type="input" label="residue, modification mass"></note>
+<note type="input" label="residue, potential modification mass">15.9949@M,0.984@Q,0.984@N,0.984@R</note>
+<note type="input" label="protein, cleavage site">[KR]|{P}</note>
+<note type="input" label="protein, cleavage C-terminal mass change">17.002735</note>
+<note type="input" label="protein, cleavage N-terminal mass change">1.0107825</note>
+<note type="input" label="protein, N-terminal residue modification mass">0</note>
+<note type="input" label="protein, C-terminal residue modification mass">0</note>
+<note type="input" label="protein, quick acetyl">yes</note>
+<note type="input" label="protein, quick pyrolidone">yes</note>
+<note type="input" label="refine">yes</note>
+<note type="input" label="refine, modification mass"></note>
+<note type="input" label="refine, spectrum synthesis">yes</note>
+<note type="input" label="refine, unanticipated cleavage">no</note>
+<note type="input" label="refine, potential modification mass"></note>
+<note type="input" label="refine, point mutations">no</note>
+<note type="input" label="refine, use potential modifications for full refinement">no</note>
+<note type="input" label="refine, cleavage semi">yes</note>
+<note type="input" label="refine, potential N-terminus modifications"></note>
+<note type="input" label="refine, potential C-terminus modifications"></note>
+<note type="input" label="scoring, minimum ion count">0</note>
+<note type="input" label="scoring, maximum missed cleavage sites">3</note>
+<note type="input" label="scoring, x ions">no</note>
+<note type="input" label="scoring, y ions">yes</note>
+<note type="input" label="scoring, z ions">no</note>
+<note type="input" label="scoring, a ions">yes</note>
+<note type="input" label="scoring, b ions">yes</note>
+<note type="input" label="scoring, c ions">no</note>
+<note type="input" label="output, path hashing">no</note>
+<note type="input" label="output, maximum valid expectation value">0.01</note>
+<note type="input" label="output, path">C:\Users\spec-piver16\source\repos\Citrullia2-May_current\Citrullia.Wpf\bin\Debug\netcoreapp3.1\Externals\XTandem\Outputs\Dynamic_EXP3_01559_VM.xml</note>
+</bioml>

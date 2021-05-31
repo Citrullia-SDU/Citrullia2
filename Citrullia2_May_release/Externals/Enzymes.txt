@@ -1,0 +1,7 @@
+Trypsin [KR]|{P}
+Chymotrypsin [WYF]|{P}
+Endo Asp-N [X]|[D]
+Endo Glu-C [E]|{PE}
+Endo Glu-C [ED]|{PE}
+Endo Lys-C [K]|{P}
+Non-Specific [X],[X]

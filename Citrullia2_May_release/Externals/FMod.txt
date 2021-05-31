@@ -1,0 +1,3 @@
+Carbamidomethyl [C] 57.0215 true
+Carboxymethyl [C] 58.01 false
+PyridylCys [C] 105.06 false

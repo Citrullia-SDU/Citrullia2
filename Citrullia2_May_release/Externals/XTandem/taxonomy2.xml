@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<bioml label="x! taxon-to-file matching list">
+<taxon label="yeast">
+<file format="peptide" URL="C:\Users\spec-piver16\Desktop\MBP_data\uniprot-yourlist_M20201022A94466D2655679D1FD8953E075198DA807830CF.fasta" />
+</taxon>
+</bioml>

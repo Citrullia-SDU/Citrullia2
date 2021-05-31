@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\spec-piver16\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\spec-piver16\\.nuget\\packages"
+    ]
+  }
+}
